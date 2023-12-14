@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>clock 2</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+        color: rgb(250, 250, 250);
+      }
+      h2 {
+        font-size: 60px;
+        color: rgba(255, 255, 255, 0.975);
+        letter-spacing: 2px;
+      }
+      .container {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .mainclock {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .submain {
+        height: 180px;
+        width: 158px;
+        background-color: rgba(132, 202, 181, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        margin: 5px;
+        margin-top: 10px;
+        border-radius: 10px;
+      }
+      .digits {
+        font-size: 100px;
+      }
+      .text {
+        font-size: 35px;
+        background-color: rgba(55, 86, 65, 0.3);
+        width: 100%;
+        text-align: center;
+      }
+      .ampm {
+        margin-top: 10px;
+        font-size: 45px;
+      }
+    </style>
+  </head>
+  <body onload="ranColor()">
+    <section>
+      <div class="container" id="container">
+        <h2 class="text1">Digital Clock</h2>
+
+        <div class="mainclock" id="mainclock">
+          <div class="submain">
+            <span class="hours digits" id="hours">00</span>
+            <span class="hours text" id="text2">Hours</span>
+          </div>
+          <div class="submain">
+            <span class="hours digits" id="minutes">00</span>
+            <span class="minutes text" id="text2">Minutes</span>
+          </div>
+          <div class="submain">
+            <span class="hours digits" id="seconds">00</span>
+            <span class="seconds text" id="text2">Seconds</span>
+          </div>
+          <div class="ampm">
+            <span class="ampm text" id="ampm">AM</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      const h = document.getElementById("hours");
+      const m = document.getElementById("minutes");
+      const s = document.getElementById("seconds");
+      const ap = document.getElementById("ampm");
+      function clock() {
+        let hours = new Date().getHours();
+        let minutes = new Date().getMinutes();
+        let seconds = new Date().getSeconds();
+        let ampm = "AM";
+
+        if (hours > 12) hours = hours - 12;
+        ampm = "PM";
+
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        h.innerText = hours;
+        m.innerText = minutes;
+        s.innerText = seconds;
+        ap.innerText = ampm;
+
+        setTimeout(() => {
+          clock();
+        }, 1000);
+      }
+      clock();
+
+      function ranColor() {
+        let letter = "123456789ABCDEF";
+        let hash = "#";
+        for (let i = 0; i < 6; i++) {
+          hash += letter[Math.floor(Math.random() * 16)];
+        }
+        document.getElementById("container").style.backgroundColor = hash;
+        setTimeout(() => {
+          ranColor();
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>
